@@ -5,7 +5,7 @@ require('dotenv').config();
 
 import { router } from './routes';
 
-const port = 8888;
+const port = 3000;
 const app = express();
 
 mongoose.run();
