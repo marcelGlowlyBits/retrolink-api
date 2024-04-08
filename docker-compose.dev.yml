@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  app:
+    container_name: retrolink-api
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - ./:/usr/src/app/retrolink-api-dev
+      - exclude:/usr/src/app/retrolink-api-dev/node_modules/
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    hostname: db
+  
+volumes:
+  exclude:

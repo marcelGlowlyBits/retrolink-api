@@ -20,4 +20,4 @@ RUN npx tsc
 EXPOSE 3000
 
 # Start de applicatie wanneer de container wordt gestart
-CMD ["npm", "start"]
+CMD ["npm", "dev"]
