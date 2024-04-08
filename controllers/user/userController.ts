@@ -13,16 +13,6 @@ module.exports = {
       })
     }
 
-    // const media = await mediaService.findOneByRef({
-    //   refType: MediaRefType.User,
-    //   refId: user.id
-    // })
-
-    // let image
-    // if (media) {
-    //   image = appUrl(await new Image(media).sharp({ width: 150, height: 150 }))
-    // }
-
     return res.status(200).json({
       data: { ...user.toJSON()},
       message: 'User found',

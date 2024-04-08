@@ -1,7 +1,6 @@
 import {ClientSession, ObjectId} from 'mongoose';
 
 import {Verification} from '../models/verification';
-import {createDateNow} from '../utils/dates';
 
 export const verificationService = {
   create: ({
