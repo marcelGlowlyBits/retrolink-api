@@ -1,5 +1,5 @@
 {
-  "name": "bos-api",
+  "name": "retrolink-api",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Techdemo/bos-api.git"
+    "url": "git+https://github.com/marcelGlowlyBits/retrolink-api.git"
   },
   "author": "marcel fleuren",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Techdemo/bos-api/issues"
+    "url": "https://github.com/marcelGlowlyBits/retrolink-api/issues"
   },
-  "homepage": "https://github.com/Techdemo/bos-api#readme",
+  "homepage": "https://github.com/marcelGlowlyBits/retrolink-api#readme",
   "devDependencies": {
     "@types/bcrypt": "5.0.0",
     "@types/email-templates": "10.0.1",

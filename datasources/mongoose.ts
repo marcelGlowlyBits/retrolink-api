@@ -15,6 +15,15 @@ export const mongoose = {
     }
   },
 
+  ping: async () => {
+    try {
+      console.log('Db connection is alive');
+      return await connection.db.admin().ping();
+    } catch (error) {
+      console.error('Could not connect to database', error);
+    }
+  },
+
   stop: async () => {
     try {
       return await connection.destroy()

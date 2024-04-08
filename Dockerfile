@@ -1,0 +1,23 @@
+# Gebruik de officiële Node.js-beeld als basis
+FROM node:14
+
+# Stel de werkmap in binnen de container
+WORKDIR /usr/src/app
+
+# Kopieer package.json en package-lock.json naar de werkmap
+COPY package*.json ./
+
+# Installeer de afhankelijkheden
+RUN npm install
+
+# Kopieer de rest van de applicatie naar de werkmap
+COPY . .
+
+# Voer de TypeScript-compiler uit om de code te compileren
+RUN npx tsc
+
+# Expose poort 3000 voor toegang tot de Express-applicatie
+EXPOSE 3000
+
+# Start de applicatie wanneer de container wordt gestart
+CMD ["npm", "start"]
