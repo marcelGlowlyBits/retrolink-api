@@ -8,12 +8,6 @@ const schema = new Schema<IUser, UserModel, IUserMethods>({
   password: String,
   firstName: String,
   lastName: String,
-  verified: {
-    type: Boolean,
-    default: false
-  },
-  verifications: [{ type: Schema.Types.ObjectId, ref: 'Verification' }],
-  resetPasswords: [{ type: Schema.Types.ObjectId, ref: 'ResetPassword' }]
 }, { timestamps: true })
 
 schema.methods.comparePassword = function (password: string) {

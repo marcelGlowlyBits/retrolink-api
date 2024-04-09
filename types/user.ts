@@ -19,9 +19,6 @@ export interface IUser {
   password: string
   firstName?: string
   lastName?: string
-  verified: boolean
-  verifications?: ObjectId[]
-  resetPasswords?: ObjectId[]
 }
 
 export interface IUserMethods {
