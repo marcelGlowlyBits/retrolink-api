@@ -1,4 +1,5 @@
 import {User} from '../models/user';
+import { mailerService } from './mailerService';
 
 export const userService = {
   create: ({email, password}: {
@@ -9,7 +10,10 @@ export const userService = {
     new User({
       email,
       password,
-    }).save(),
+    }).save().then((user) => {
+      mailerService.sendWelcome(user.email);
+      return user;
+    }),
 
   isExistByEmail: (email: string) => User.exists({email}),
 

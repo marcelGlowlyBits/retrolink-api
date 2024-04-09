@@ -68,7 +68,7 @@ module.exports = {
       const hashedPassword = await createHash(password);
 
       const user = await userService.create({ email, password: hashedPassword });
-
+  
       const {accessToken} = jwtSign(user.id);
 
       return res.status(200).json({
