@@ -1,2 +1,3 @@
 export {userService} from './userService';
-export {verificationService} from './verificationService';
+export {mailerService} from './mailerService';
+

@@ -1,11 +1,7 @@
 import {Response} from 'express';
-import {startSession} from 'mongoose';
 
-import {userService, verificationService} from '../../services';
+import {userService} from '../../services';
 import {createHash} from '../../utils/hash';
-import {createCryptoString} from '../../utils/cryptoString';
-import {createDateAddDaysFromNow} from '../../utils/dates';
-import {ExpiresInDays} from '../../constants';
 import {jwtSign} from '../../utils/jwt';
 
 import {SignInPayload, SignUpPayload} from '../../types/auth';
@@ -62,8 +58,6 @@ module.exports = {
       })
     }
 
-    const session = await startSession();
-
     try { 
       const isUserExist = await userService.isExistByEmail(email);
 
@@ -71,30 +65,11 @@ module.exports = {
         return res.status(400).send('User already exists');
       }
 
-      session.startTransaction();
       const hashedPassword = await createHash(password);
 
-      const user = await userService.create({ email, password: hashedPassword }, session);
-
-      const cryptoString = createCryptoString();
-      const dateFromNow = createDateAddDaysFromNow(ExpiresInDays.Verification);
-
-      const verification = await verificationService.create({
-        userId: user.id,
-        email,
-        accessToken: cryptoString,
-        expiresIn: dateFromNow
-      }, session);
-
-      await userService.addVerificationToUser({
-        userId: user.id,
-        verificationId: verification.id
-      }, session);
-
+      const user = await userService.create({ email, password: hashedPassword });
+  
       const {accessToken} = jwtSign(user.id);
-
-      await session.commitTransaction()
-      session.endSession()
 
       return res.status(200).json({
         data: {accessToken},
@@ -103,10 +78,7 @@ module.exports = {
       })
     
     } catch (error) {
-      if (session.inTransaction()) {
-        await session.abortTransaction()
-        session.endSession()
-      }
+      console.log('error', error);
 
       return res.status(500).json({
         message: 'bad request',
